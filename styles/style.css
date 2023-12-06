@@ -3,3 +3,61 @@
 .page {
   /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
 }
+
+/* 
+  Header
+*/
+
+.header {
+  position: relative; /* Для позиционирования декоративных элементов именно относительно шапки */
+  /* ОПТИМИЗИРОВАТЬ */
+  height: 100vh;
+}
+
+/* Декоративный элемент REC */
+.decorative-element::before {
+  /* Текст */
+  content: 'REC';
+  font-size: var(--text-font-size);
+  color: var(--accent-color);
+  /* Позиционируется относительно шапки */
+  position: absolute;
+  inset-block-start: 11px;
+  inset-inline-end: 11px;
+  /* Отступ для изображения */
+  padding-inline-end: 27px;
+  /* Изображение */
+  background-image: url('../images/ellipse.svg');
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position-x: 94%;
+  background-position-y: 50%;
+}
+
+/* Декоративный уголок start */
+.decorated-zone::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset-block-start: 10px;
+  inset-inline-end: 10px;
+  inline-size: 25px;
+  block-size: 25px;
+  color: var(--accent-color);
+  border-inline-end: solid 1px currentColor;
+  border-block-start: solid 1px currentColor;
+}
+
+/* Декоративный уголок end */
+.decorated-zone::after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset-block-end: 10px;
+  inset-inline-start: 10px;
+  inline-size: 25px;
+  block-size: 25px;
+  color: var(--accent-color);
+  border-inline-start: solid 1px currentColor;
+  border-block-end: solid 1px currentColor;
+}
