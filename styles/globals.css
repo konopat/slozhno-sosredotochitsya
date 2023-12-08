@@ -12,6 +12,8 @@ body {
   margin: 0 auto;
   /* Шрифт везде одинаковый, меняется только толщина и размер */
   font-family: 'IBM Plex Mono', sans-serif;
+  font-size: var(--text-font-size); /* Базовый размер шрифта */
+  line-height: var(--text-line-height); /* Базовая высота строки */
 }
 
 h1,
@@ -32,6 +34,13 @@ ul {
 
 picture {
   margin: 0;
+  padding: 0;
+}
+
+/* Обнуление стилей для кнопок */
+button {
+  background: none;
+  border: none;
   padding: 0;
 }
 

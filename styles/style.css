@@ -2,6 +2,7 @@
 
 .page {
   /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
+  background-color: var(--background-color);
 }
 
 /* 
@@ -10,8 +11,87 @@
 
 .header {
   position: relative; /* Для позиционирования декоративных элементов именно относительно шапки */
-  /* ОПТИМИЗИРОВАТЬ */
-  height: 100vh;
+  display: grid;
+  height: 100vh; /* ОПТИМИЗИРОВАТЬ */
+  padding-block-start: var(--indentation);
+  padding-inline-start: var(--indentation);
+  padding-inline-end: var(--indentation);
+  background-image: var(--background-image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* 
+  – Меню переключения темы 
+*/
+
+.header__theme-menu {
+  justify-self: end; /* В мобильной версии по умолчанию */
+}
+
+.header__theme-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Стили кнопок по умолчанию */
+/* Системные стили обнулены в global.css для всех кнопок */
+.header__theme-menu-button {
+  color: var(--button-color);
+  text-transform: lowercase;
+  padding: 0 13px;
+  border: solid 1px transparent; /* Чтобы не дергалась верстка при появлении border */
+}
+
+/* Конпка при наведении */
+.header__theme-menu-button:hover {
+  /* border меняет прозрачность на 40% от исходного цвета.
+      Для реализации этого смешиваем исходный цвет с прозрачным (transparent).
+        Работаем в режиме srgb для поддержки большинства экранов.
+  */
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+/* Активная кнопка */
+.header__theme-menu-button_active {
+  border: solid 1px currentColor;
+  pointer-events: none;
+}
+
+/* Кнопка при фокусировании */
+.header__theme-menu-button:focus {
+  outline: transparent;
+  border: solid 1px transparent;
+  border-block-end-color: currentColor;
+}
+
+.header__theme-menu-button:focus-visible {
+  outline-offset: 2px;
+}
+
+.primary-heading {
+  color: var(--primary-heading-color);
+  font-size: var(--primary-heading-font-size);
+  text-transform: lowercase;
+  font-size: 116px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 82.5%; /* 95.7px */
+  text-shadow: 4px 4px 0 var(--accent-color);
+}
+
+.header__description {
+  align-self: start;
+  justify-self: stretch;
+}
+
+.title-decor {
+  color: var(--title-color);
+  background-color: var(--accent-color);
+  font-weight: bold;
 }
 
 /* Декоративный элемент REC */
@@ -22,8 +102,8 @@
   color: var(--accent-color);
   /* Позиционируется относительно шапки */
   position: absolute;
-  inset-block-start: 11px;
-  inset-inline-end: 11px;
+  inset-block-start: var(--indentation);
+  inset-inline-end: var(--indentation);
   /* Отступ для изображения */
   padding-inline-end: 27px;
   /* Изображение */
@@ -39,11 +119,11 @@
   content: '';
   display: block;
   position: absolute;
-  inset-block-start: 10px;
-  inset-inline-end: 10px;
+  inset-block-start: var(--indentation);
+  inset-inline-end: var(--indentation);
   inline-size: 25px;
   block-size: 25px;
-  color: var(--accent-color);
+  color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
   border-inline-end: solid 1px currentColor;
   border-block-start: solid 1px currentColor;
 }
@@ -53,11 +133,88 @@
   content: '';
   display: block;
   position: absolute;
-  inset-block-end: 10px;
-  inset-inline-start: 10px;
+  inset-block-end: var(--indentation);
+  inset-inline-start: var(--indentation);
   inline-size: 25px;
   block-size: 25px;
-  color: var(--accent-color);
+  color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
   border-inline-start: solid 1px currentColor;
   border-block-end: solid 1px currentColor;
+}
+
+/* 
+  Статьи
+*/
+
+.
+
+/* 
+  Адаптация
+*/
+
+/* Планшет */
+
+@media (768px <= width < 1024px) {
+  :root {
+    --primary-heading-font-size: clamp(
+      7.5rem,
+      0.5625rem + 14.4531vw,
+      9.8125rem
+    );
+  }
+
+  .page {
+    --indentation: 20px;
+  }
+
+  .header {
+    padding-inline-start: 0;
+    padding-block-end: var(--indentation);
+  }
+
+  .header__description {
+    justify-self: end;
+    max-inline-size: 364px;
+  }
+}
+
+/* Десктоп */
+
+@media (1024px <= width) {
+  :root {
+    --primary-heading-font-size: clamp(
+      7.5rem,
+      0.5625rem + 14.4531vw,
+      9.8125rem
+    );
+  }
+
+  .header__description {
+    justify-self: end;
+    max-inline-size: 491px;
+  }
+
+  .header__theme-menu {
+    justify-self: center;
+    position: absolute;
+    margin-block-start: var(--indentation);
+  }
+
+  .header__theme-menu-list {
+    flex-direction: row;
+  }
+
+  .primary-heading {
+    margin-block-start: 18%;
+    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  }
+
+  /* повторяется с планшетом */
+  .page {
+    --indentation: 20px;
+  }
+  .header {
+    padding-inline-start: 0;
+    padding-block-end: var(--indentation);
+  }
 }

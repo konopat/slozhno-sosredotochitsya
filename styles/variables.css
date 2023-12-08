@@ -3,11 +3,18 @@
 */
 
 :root {
+  /* Макет */
+  --indentation: 10px;
   /* Цвета */
   --background-color: #000028;
+  --background-image: url(../images/cover-image-dark.png);
   --accent-color: #ff0070;
+  --button-color: #ff0070;
+  --title-color: #000028;
   --text-color: #f1b2ce;
   --primary-heading-color: #db00ff;
   /* Типографика */
+  --primary-heading-font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
   --text-font-size: 18px;
+  --text-line-height: 23.4px; /* 130% */
 }
