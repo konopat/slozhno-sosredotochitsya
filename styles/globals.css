@@ -27,6 +27,11 @@ p {
   font-size: var(--text-font-size); /* Базовый размер шрифта */
 }
 
+p {
+  color: var(--text-color); /* Базовый цвет текста */
+  line-height: 23.4px; /* Базовая высота строки */
+}
+
 ul {
   margin: 0;
   padding: 0;

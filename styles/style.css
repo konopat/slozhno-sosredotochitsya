@@ -1,8 +1,12 @@
-/* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
-
 .page {
-  /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
+  /* Фон всей страницы */
   background-color: var(--background-color);
+}
+
+/* Основной контент */
+.content {
+  padding-block: var(--content-padding-block);
+  padding-inline: var(--content-padding);
 }
 
 /* 
@@ -13,9 +17,7 @@
   display: grid; /* Для позиционирования дочерних элементов */
   position: relative; /* Для позиционирования декоративных элементов */
   height: 100vh; /* ОПТИМИЗИРОВАТЬ */
-  padding-block-start: var(--indentation);
-  padding-inline-start: var(--indentation);
-  padding-inline-end: var(--indentation);
+  gap: 10px;
 }
 
 /* Декоративный элемент REC */
@@ -26,8 +28,8 @@
   color: var(--accent-color);
   /* Позиционируется относительно шапки */
   position: absolute;
-  inset-block-start: var(--indentation);
-  inset-inline-end: var(--indentation);
+  inset-block-start: var(--content-padding);
+  inset-inline-end: var(--content-padding);
   /* Отступ для изображения */
   padding-inline-end: 27px;
   /* Изображение */
@@ -38,32 +40,94 @@
   background-position-y: 50%;
 }
 
-/* Декоративный уголок start */
-.decorated-zone::before {
-  content: '';
-  display: block;
-  position: absolute;
-  inset-block-start: var(--indentation);
-  inset-inline-end: var(--indentation);
-  inline-size: 25px;
-  block-size: 25px;
-  color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
-  border-inline-end: solid 1px currentColor;
-  border-block-start: solid 1px currentColor;
-}
-
-/* Декоративный уголок end */
+/* Декоративные уголки */
+.decorated-zone::before,
 .decorated-zone::after {
   content: '';
   display: block;
   position: absolute;
-  inset-block-end: var(--indentation);
-  inset-inline-start: var(--indentation);
   inline-size: 25px;
   block-size: 25px;
   color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
+}
+
+/* Декоративный уголок start */
+.decorated-zone::before {
+  inset-block-start: var(--content-padding);
+  inset-inline-end: var(--content-padding);
+  border-inline-end: solid 1px currentColor;
+  border-block-start: solid 1px currentColor;
+}
+
+/* Декоративный уголок end  */
+.decorated-zone::after {
+  inset-block-end: var(--content-padding);
+  inset-inline-start: var(--content-padding);
   border-inline-start: solid 1px currentColor;
   border-block-end: solid 1px currentColor;
+}
+
+/* 
+  Типографика
+*/
+
+/* Главный заголовок */
+.primary-heading {
+  color: var(--primary-heading-color);
+  font-size: var(--primary-heading-font-size);
+  text-transform: lowercase;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 82.5%; /* 95.7px */
+}
+
+/* Главный заголовок в header */
+.header .primary-heading {
+  text-shadow: 4px 4px 0 var(--accent-color);
+}
+
+/* Главный заголовок в footer */
+.footer .primary-heading {
+  text-shadow: 2px 2px 0 var(--accent-color);
+}
+
+/* Дополнительный заголовок */
+.title-decor {
+  color: var(--title-color);
+  background-color: var(--accent-color);
+  font-weight: bold;
+}
+
+/* Заголовок секции */
+.section_heading {
+  color: var(--section-heading-color);
+}
+
+/* Заголовок статьи */
+.article_heading {
+  margin-block-end: var(--paragraph);
+}
+
+/* Ссылка внутри текста */
+.internal_text_link {
+  text-shadow: 2px 2px 0px var(--accent-color);
+  border: solid 1px transparent;
+  /*  */
+}
+
+/* Ссылка внутри текста при наведении */
+.internal_text_link:hover {
+  border-block-end-color: currentColor;
+}
+
+/* Ссылка внутри текста при неявной фокусировке */
+.internal_text_link:focus {
+  outline: none;
+}
+
+/* Ссылка внутри текста при явной фокусировке */
+.internal_text_link:focus-visible {
+  border-color: currentColor;
 }
 
 /* 
@@ -80,10 +144,11 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  padding: var(--content-padding);
 }
 
 /* 
-  – – Меню переключения темы 
+  – Секция – Header – Меню переключения темы 
 */
 
 .header__theme-menu {
@@ -96,12 +161,12 @@
   gap: 10px;
 }
 
-/* Стили кнопок по умолчанию */
-/* Системные стили обнулены в global.css для всех кнопок */
+/* Стили кнопок в header */
+/* Системные стили кнопок обнулены в global.css */
 .header__theme-menu-button {
   color: var(--button-color);
   text-transform: lowercase;
-  padding: 0 13px;
+  padding: 1px 13px;
   border: solid 1px transparent; /* Чтобы не дергалась верстка при появлении border */
 }
 
@@ -122,73 +187,44 @@
 
 /* Кнопка при фокусировании */
 .header__theme-menu-button:focus {
-  outline: transparent;
-  border: solid 1px transparent;
-  border-block-end-color: currentColor;
+  outline: none; /* Сбрасываем стандартную обводку, дизайнер предложил кастомную для явной фокусировки */
 }
 
+/* Кнопка в режиме явной фокусировки */
 .header__theme-menu-button:focus-visible {
-  outline-offset: 2px;
+  /* Кастомная обводка в виде нижнего подчеркивания */
+  border: solid 1px transparent; /* Чтобы не дергалась верстка при появлении border */
+  border-block-end-color: currentColor; /* Проявляем нижнее подчеркивание */
 }
 
-.primary-heading {
-  color: var(--primary-heading-color);
-  font-size: var(--primary-heading-font-size);
-  text-transform: lowercase;
-  font-size: 116px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 82.5%; /* 95.7px */
-}
-
-.header .primary-heading {
-  text-shadow: 4px 4px 0 var(--accent-color);
-}
-
-.footer .primary-heading {
-  text-shadow: 2px 2px 0 var(--accent-color);
-}
+/* 
+  – Секция – Header – Описание
+*/
 
 .header__description {
   align-self: start;
   justify-self: stretch;
 }
 
-.title-decor {
-  color: var(--title-color);
-  background-color: var(--accent-color);
-  font-weight: bold;
-}
-
 /* 
   – Секция – Статьи
 */
 
+/* Общие стили для всех секций со статьями */
 .section_articles {
   display: grid;
-  padding-inline: var(--indentation);
+  padding-block-end: 50px;
   gap: 20px;
 }
 
-.section_articles__ribbon_view {
-  padding-block-start: 40px;
-  padding-block-end: 50px;
-}
-
+/* Отступы между статьями */
 .article-item:not(:last-child) {
   margin-block-end: 20px;
 }
 
-.section_heading {
-  color: var(--section-heading-color);
-}
-
-.article_heading {
-  margin-block-end: var(--paragraph);
-}
-
-.internal_text_link {
-  text-shadow: 2px 2px 0px var(--accent-color);
+/* Если в секции используется дополнительный заголовок */
+.title-decor + .article_list .title-decor {
+  font-weight: normal;
 }
 
 /* 
@@ -197,13 +233,12 @@
 
 .gallery {
   display: grid;
-  gap: var(--indentation);
-  padding: var(--indentation);
+  gap: var(--content-padding);
 }
 
 .gallery img {
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: cover;
 }
 
@@ -220,165 +255,163 @@
   Адаптация
 */
 
-/* Планшет */
+/* Общие стили для широких (не мобильных) экранов */
+@media (768px <= width) {
+  /* 
+    Переменные
+  */
 
-@media (768px <= width < 1024px) {
   :root {
+    /* Размер главного заголовка */
     --primary-heading-font-size: clamp(
       7.5rem,
       0.5625rem + 14.4531vw,
       9.8125rem
     );
+    /* Отступы */
+    --content-padding: 20px;
+    --content-padding-block: 60px;
   }
 
-  .page {
-    --indentation: 20px;
-  }
+  /* 
+    Header 
+  */
 
   .header {
     padding-inline-start: 0;
-    padding-block-end: var(--indentation);
   }
 
-  .header__description {
-    justify-self: end;
-    max-inline-size: 364px;
+  /* 
+    Статьи 
+  */
+
+  /* Отступ между секциями статей */
+  .section_articles {
+    padding-block-end: 80px;
   }
 
-  .section_articles__ribbon_view {
+  /* Лейаут каждой нечетной секции */
+  .section_articles:nth-of-type(odd) {
     grid-template-columns: 1fr 2fr;
+    gap: 0 20px;
   }
 
-  .section_articles__grid_view .section_heading {
-    max-inline-size: 30%;
-  }
-
-  .grid-ignore {
+  /* Заголовок каждой нечетной секции */
+  .section_articles:nth-of-type(odd) .section_heading {
+    /* Растягивается с первой до последней строки */
     grid-row-start: 1;
     grid-row-end: 3;
   }
 
+  /* Дополнительный заголовок в нечетной секции */
+  .section_articles:nth-of-type(odd) .section_heading + .title-decor {
+    margin-bottom: 20px;
+  }
+
+  /* Заголовок каждой четной секции */
+  .section_articles:nth-of-type(even) .section_heading {
+    max-inline-size: 30%;
+  }
+
+  /* 
+    Галерея 
+  */
+
   .gallery {
+    /* Сетка из трех колонок */
     grid-template-columns: repeat(3, 1fr);
+    /* Разрешает занимать свободное пространство */
     grid-auto-flow: dense;
   }
 
-  .gallery h2 {
+  /* Заголовок галереи */
+  .gallery .title-decor {
+    /* Растягивается с первой до последней колонки */
     grid-column-start: 1;
     grid-column-end: 4;
   }
 
+  /* Закат */
   .gallery img:first-of-type {
     grid-row: 2;
     grid-column-start: 1;
     grid-column-end: 3;
   }
 
+  /* Мороженное */
   .gallery img:nth-of-type(2) {
     grid-row-start: 2;
     grid-row-end: 4;
   }
 
+  /* Кассета */
   .gallery img:nth-of-type(3) {
     grid-row-start: 3;
     grid-row-end: 5;
   }
 
+  /* Улица */
   .gallery img:last-of-type {
     grid-column-start: 2;
     grid-column-end: 4;
   }
 }
 
+/* Планшет */
+
+@media (768px <= width < 1024px) {
+  /* 
+    Header 
+  */
+
+  .header__description {
+    justify-self: end;
+    max-inline-size: 364px;
+  }
+}
+
 /* Десктоп */
 
 @media (1024px <= width) {
-  :root {
-    --primary-heading-font-size: clamp(
-      7.5rem,
-      0.5625rem + 14.4531vw,
-      9.8125rem
-    );
+  /* 
+    Header
+  */
+
+  /* Меню изменяет положение */
+  .header__theme-menu {
+    justify-self: center;
+    position: absolute;
+    margin-block-start: var(--content-padding);
   }
 
+  /* Элементы меню */
+  .header__theme-menu-list {
+    /* Выстраиваются в ряд */
+    flex-direction: row;
+  }
+
+  /* Описание */
   .header__description {
     justify-self: end;
     max-inline-size: 491px;
   }
 
-  .header__theme-menu {
-    justify-self: center;
-    position: absolute;
-    margin-block-start: var(--indentation);
-  }
-
-  .header__theme-menu-list {
-    flex-direction: row;
-  }
-
   .header .primary-heading {
     margin-block-start: 18%;
-    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
   }
 
-  .section_articles__ribbon_view {
-    grid-template-columns: 1fr 2fr;
+  /* 
+    Статьи
+  */
+
+  /* Лейаут каждой нечетной секции */
+  .section_articles:nth-of-type(odd) {
+    gap: 0 10px;
   }
 
-  .section_articles__grid_view .article_list {
+  .section_articles:nth-of-type(even) .article_list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-  }
-
-  /* .section_articles__grid_view .article-item:not(:last-child) {
-    margin-block-end: 0;
-  } */
-
-  /* повторяется с планшетом */
-  .page {
-    --indentation: 20px;
-  }
-  .header {
-    padding-inline-start: 0;
-    padding-block-end: var(--indentation);
-  }
-  .section_articles__grid_view .section_heading {
-    max-inline-size: 30%;
-  }
-  .grid_ignore_column {
-    grid-row-start: 1;
-    grid-row-end: 3;
-  }
-
-  .gallery {
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-flow: dense;
-  }
-
-  .gallery h2 {
-    grid-column-start: 1;
-    grid-column-end: 4;
-  }
-
-  .gallery img:first-of-type {
-    grid-row: 2;
-    grid-column-start: 1;
-    grid-column-end: 3;
-  }
-
-  .gallery img:nth-of-type(2) {
-    grid-row-start: 2;
-    grid-row-end: 4;
-  }
-
-  .gallery img:nth-of-type(3) {
-    grid-row-start: 3;
-    grid-row-end: 5;
-  }
-
-  .gallery img:last-of-type {
-    grid-column-start: 2;
-    grid-column-end: 4;
   }
 }

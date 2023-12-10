@@ -7,11 +7,13 @@
 :root .theme_dark {
   /* Цвета */
   --background-color: #000028;
+  --background-image: url(../images/cover-image-dark.png);
   --accent-color: #ff0070;
   --button-color: #ff0070;
+  --primary-heading-color: #db00ff;
+  --section-heading-color: #ff0070;
   --title-color: #000028;
   --text-color: #f1b2ce;
-  --primary-heading-color: #db00ff;
 }
 
 .page.theme_dark {

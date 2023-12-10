@@ -10,9 +10,10 @@
   --background-image: url(../images/cover-image-light.png);
   --accent-color: #ff8dcb;
   --button-color: #353430;
+  --primary-heading-color: #ffc2e6;
+  --section-heading-color: #353430;
   --title-color: #353430;
   --text-color: #353430;
-  --primary-heading-color: #ffc2e6;
 }
 
 /* Декоративный элемент REC */
@@ -35,9 +36,10 @@
     --background-image: url(../images/cover-image-light.png);
     --accent-color: #ff8dcb;
     --button-color: #353430;
+    --primary-heading-color: #ffc2e6;
+    --section-heading-color: #353430;
     --title-color: #353430;
     --text-color: #353430;
-    --primary-heading-color: #ffc2e6;
   }
 
   /* Декоративный элемент REC */
