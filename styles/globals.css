@@ -24,6 +24,7 @@ h5,
 h6,
 p {
   margin: 0;
+  font-size: var(--text-font-size); /* Базовый размер шрифта */
 }
 
 ul {
@@ -50,4 +51,5 @@ a {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  text-decoration: none;
 }
