@@ -6,16 +6,75 @@
 }
 
 /* 
-  Header
+  Декорации
 */
 
-.header {
-  position: relative; /* Для позиционирования декоративных элементов именно относительно шапки */
-  display: grid;
+.decorated-zone {
+  display: grid; /* Для позиционирования дочерних элементов */
+  position: relative; /* Для позиционирования декоративных элементов */
   height: 100vh; /* ОПТИМИЗИРОВАТЬ */
   padding-block-start: var(--indentation);
   padding-inline-start: var(--indentation);
   padding-inline-end: var(--indentation);
+}
+
+/* Декоративный элемент REC */
+.decorative-element::before {
+  /* Текст */
+  content: 'REC';
+  font-size: var(--text-font-size);
+  color: var(--accent-color);
+  /* Позиционируется относительно шапки */
+  position: absolute;
+  inset-block-start: var(--indentation);
+  inset-inline-end: var(--indentation);
+  /* Отступ для изображения */
+  padding-inline-end: 27px;
+  /* Изображение */
+  background-image: url('../images/ellipse.svg');
+  background-repeat: no-repeat;
+  background-size: 22px;
+  background-position-x: 94%;
+  background-position-y: 50%;
+}
+
+/* Декоративный уголок start */
+.decorated-zone::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset-block-start: var(--indentation);
+  inset-inline-end: var(--indentation);
+  inline-size: 25px;
+  block-size: 25px;
+  color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
+  border-inline-end: solid 1px currentColor;
+  border-block-start: solid 1px currentColor;
+}
+
+/* Декоративный уголок end */
+.decorated-zone::after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset-block-end: var(--indentation);
+  inset-inline-start: var(--indentation);
+  inline-size: 25px;
+  block-size: 25px;
+  color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
+  border-inline-start: solid 1px currentColor;
+  border-block-end: solid 1px currentColor;
+}
+
+/* 
+  Секции
+*/
+
+/* 
+  – Секция – Header
+*/
+
+.header {
   background-image: var(--background-image);
   background-repeat: no-repeat;
   background-size: cover;
@@ -24,7 +83,7 @@
 }
 
 /* 
-  – Меню переключения темы 
+  – – Меню переключения темы 
 */
 
 .header__theme-menu {
@@ -80,7 +139,14 @@
   font-style: normal;
   font-weight: 700;
   line-height: 82.5%; /* 95.7px */
+}
+
+.header .primary-heading {
   text-shadow: 4px 4px 0 var(--accent-color);
+}
+
+.footer .primary-heading {
+  text-shadow: 2px 2px 0 var(--accent-color);
 }
 
 .header__description {
@@ -94,56 +160,8 @@
   font-weight: bold;
 }
 
-/* Декоративный элемент REC */
-.decorative-element::before {
-  /* Текст */
-  content: 'REC';
-  font-size: var(--text-font-size);
-  color: var(--accent-color);
-  /* Позиционируется относительно шапки */
-  position: absolute;
-  inset-block-start: var(--indentation);
-  inset-inline-end: var(--indentation);
-  /* Отступ для изображения */
-  padding-inline-end: 27px;
-  /* Изображение */
-  background-image: url('../images/ellipse.svg');
-  background-repeat: no-repeat;
-  background-size: 22px;
-  background-position-x: 94%;
-  background-position-y: 50%;
-}
-
-/* Декоративный уголок start */
-.decorated-zone::before {
-  content: '';
-  display: block;
-  position: absolute;
-  inset-block-start: var(--indentation);
-  inset-inline-end: var(--indentation);
-  inline-size: 25px;
-  block-size: 25px;
-  color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
-  border-inline-end: solid 1px currentColor;
-  border-block-start: solid 1px currentColor;
-}
-
-/* Декоративный уголок end */
-.decorated-zone::after {
-  content: '';
-  display: block;
-  position: absolute;
-  inset-block-end: var(--indentation);
-  inset-inline-start: var(--indentation);
-  inline-size: 25px;
-  block-size: 25px;
-  color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
-  border-inline-start: solid 1px currentColor;
-  border-block-end: solid 1px currentColor;
-}
-
 /* 
-  Статьи
+  – Секция – Статьи
 */
 
 .section_articles {
@@ -174,7 +192,7 @@
 }
 
 /* 
-  Галерея
+  – Секция – Галерея
 */
 
 .gallery {
@@ -187,6 +205,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* 
+  – Секция – Footer
+*/
+
+.footer {
+  justify-content: center;
+  align-items: center;
 }
 
 /* 
@@ -289,7 +316,7 @@
     flex-direction: row;
   }
 
-  .primary-heading {
+  .header .primary-heading {
     margin-block-start: 18%;
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
   }
