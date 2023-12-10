@@ -2,7 +2,7 @@
 
 Третья проектная работа по направлению Фулл-стак разработчик на платформе Яндекс Практикум. Pixel-perfect верстка по макету из фигмы с акцентом на адаптивный дизайн.
 
-![index.html preview](./preview.jpg)
+![index.html preview](./preview.jpeg)
 
 Ссылка для автотестов:
 https://github.com/konopat/slozhno-sosredotochitsya.git
