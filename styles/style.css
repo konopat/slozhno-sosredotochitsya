@@ -21,7 +21,7 @@
 .decorated-zone {
   display: grid; /* Для позиционирования дочерних элементов */
   position: relative; /* Для позиционирования декоративных элементов */
-  height: 100vh; /* ОПТИМИЗИРОВАТЬ */
+  height: 100vh;
   gap: 10px;
 }
 
