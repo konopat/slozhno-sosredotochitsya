@@ -20,9 +20,17 @@
 
 .decorated-zone {
   display: grid; /* Для позиционирования дочерних элементов */
+  align-content: space-evenly;
   position: relative; /* Для позиционирования декоративных элементов */
   height: 100vh;
-  gap: 10px;
+}
+
+/* Контейнер декоративного элемента REC */
+.decorative-element {
+  /* Позиционируется относительно шапки */
+  position: absolute;
+  inset-block-start: var(--content-padding);
+  inset-inline-end: var(--content-padding);
 }
 
 /* Декоративный элемент REC */
@@ -31,10 +39,6 @@
   content: 'REC';
   font-size: var(--text-font-size);
   color: var(--accent-color);
-  /* Позиционируется относительно шапки */
-  position: absolute;
-  inset-block-start: var(--content-padding);
-  inset-inline-end: var(--content-padding);
   /* Отступ для изображения */
   padding-inline-end: 27px;
   /* Изображение */
@@ -45,12 +49,11 @@
   background-position-y: 50%;
 }
 
-/* Декоративные уголки */
+/* Декоративные уголки (общие стили) */
 .decorated-zone::before,
 .decorated-zone::after {
   content: '';
   display: block;
-  position: absolute;
   inline-size: 25px;
   block-size: 25px;
   color: var(--button-color); /* Декоративный элемент принимает цвет кнопки */
@@ -58,6 +61,7 @@
 
 /* Декоративный уголок start */
 .decorated-zone::before {
+  position: absolute;
   inset-block-start: var(--content-padding);
   inset-inline-end: var(--content-padding);
   border-inline-end: solid 1px currentColor;
@@ -66,6 +70,7 @@
 
 /* Декоративный уголок end  */
 .decorated-zone::after {
+  position: absolute;
   inset-block-end: var(--content-padding);
   inset-inline-start: var(--content-padding);
   border-inline-start: solid 1px currentColor;
@@ -177,6 +182,7 @@
         Работаем в режиме srgb для поддержки большинства экранов.
   */
   border-color: color-mix(in srgb, currentColor 40%, transparent);
+  cursor: pointer;
 }
 
 /* Активная кнопка */
@@ -223,7 +229,7 @@
 }
 
 /* Если в секции используется дополнительный заголовок */
-.title-decor + .article_list .title-decor {
+h4.title-decor {
   font-weight: normal;
 }
 
@@ -240,6 +246,7 @@
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 /* 
@@ -257,22 +264,6 @@
 
 /* Общие стили для широких (не мобильных) экранов */
 @media (768px <= width) {
-  /* 
-    Переменные
-  */
-
-  :root {
-    /* Размер главного заголовка */
-    --primary-heading-font-size: clamp(
-      7.5rem,
-      0.5625rem + 14.4531vw,
-      9.8125rem
-    );
-    /* Отступы */
-    --content-padding: 20px;
-    --content-padding-block: 60px;
-  }
-
   /* 
     Header 
   */
@@ -373,6 +364,10 @@
 /* Десктоп */
 
 @media (1024px <= width) {
+  .decorated-zone {
+    align-content: normal;
+  }
+
   /* 
     Header
   */
@@ -380,8 +375,9 @@
   /* Меню изменяет положение */
   .header__theme-menu {
     justify-self: center;
-    position: absolute;
-    margin-block-start: var(--content-padding);
+    /* Компенсирует отступ, который убрали для позиционирования главного заголовка,
+    Чтобы не использовать отрицательные значения */
+    padding-inline-start: 20px;
   }
 
   /* Элементы меню */
@@ -397,7 +393,7 @@
   }
 
   .header .primary-heading {
-    margin-block-start: 18%;
+    margin-block-start: 16%;
   }
 
   /* 

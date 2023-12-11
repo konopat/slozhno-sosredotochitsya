@@ -11,7 +11,7 @@ body {
   max-inline-size: 1440px;
   margin: 0 auto;
   /* Шрифт везде одинаковый, меняется только толщина и размер */
-  font-family: 'IBM Plex Mono', sans-serif;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: var(--text-font-size); /* Базовый размер шрифта */
   line-height: var(--text-line-height); /* Базовая высота строки */
 }
